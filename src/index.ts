@@ -1,4 +1,5 @@
 import { createStore } from "./lib";
+import applyMiddleWare from "./lib/applyMiddleware";
 import { Action } from "./lib/typings";
 
 type ReducerState = {
@@ -33,7 +34,7 @@ function reducer(state: ReducerState, action: ActionType): ReducerState {
   }
 }
 
-const store = createStore<ReducerState, ActionType>(reducer);
+const store = createStore<ReducerState, ActionType>(reducer, applyMiddleWare());
 
 const plus10 = document.getElementById("plus10");
 const minus10 = document.getElementById("minus10");

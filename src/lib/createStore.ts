@@ -19,7 +19,8 @@ export default function createStore<
     if (typeof enhancer !== "function") {
       throw new Error("enhancer参数需要传入一个函数！");
     }
-    // TODO enhance 中间件逻辑
+
+    enhancer(createStore)(reducer);
   }
 
   /** 当前的状态 初始化为null */
@@ -145,6 +146,6 @@ export default function createStore<
     dispatch,
     subscribe,
     getState,
-    replaceReducer
+    replaceReducer,
   };
 }

@@ -32,3 +32,14 @@ export interface Store<StateType = any, ActionType extends Action = Action> {
   dispatch: Dispatch<ActionType>;
   replaceReducer: (reducer: Reducer<StateType, ActionType>) => void;
 }
+
+export interface MiddlewareAPI<StateType = any, ActionType extends Action = Action> {
+  dispatch: Dispatch<ActionType>
+  getState: () => StateType
+}
+
+/** 中间件类型 store => dispatch => dispatch */
+export type Middleware = <StateType = any, ActionType extends Action = Action>(
+  store: MiddlewareAPI<StateType, ActionType>
+) => (dispatch: Dispatch<ActionType>) => Dispatch<ActionType>;
+
