@@ -12,9 +12,23 @@ export interface Action {
 }
 
 /** Reducer类型 */
-export interface Reducer<StateType = any, ActionType = Action> {
+export interface Reducer<StateType = any, ActionType extends Action = Action> {
   (state: StateType, action: ActionType): StateType;
 }
 
 /** 监听器 listener callback */
 export type ListenerCallback = () => void;
+export type UnSubscribeListener = () => void;
+
+/** dispatch */
+export type Dispatch<ActionType extends Action = Action> = (
+  action: ActionType
+) => void;
+
+/** store类型 */
+export interface Store<StateType = any, ActionType extends Action = Action> {
+  getState: () => StateType;
+  subscribe: (listenerCallback: ListenerCallback) => UnSubscribeListener;
+  dispatch: Dispatch<ActionType>;
+  replaceReducer: (reducer: Reducer<StateType, ActionType>) => void;
+}

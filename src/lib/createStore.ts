@@ -1,10 +1,19 @@
-import { Action, EActionType, ListenerCallback, Reducer } from "./typings";
+import {
+  Action,
+  EActionType,
+  ListenerCallback,
+  Reducer,
+  Store,
+} from "./typings";
 
 /** createStore 函数 用来创建store对象 */
 export default function createStore<
   StateType = any,
   ActionType extends Action = Action
->(reducer: Reducer<StateType, ActionType>, enhancer?: any) {
+>(
+  reducer: Reducer<StateType, ActionType>,
+  enhancer?: any
+): Store<StateType, ActionType> {
   /** 判断enhancer是否传入，如果传入则传入createStore reducer等*/
   if (typeof enhancer !== "undefined") {
     if (typeof enhancer !== "function") {
@@ -136,5 +145,6 @@ export default function createStore<
     dispatch,
     subscribe,
     getState,
+    replaceReducer
   };
 }
