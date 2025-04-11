@@ -4,7 +4,7 @@ const CSSMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
 
 // 打包DEMO
 module.exports =  {
-  mode: "development",
+  mode: "none",
   context: path.resolve(__dirname, "../"),
   entry: "./src/index.ts",
   output: {
