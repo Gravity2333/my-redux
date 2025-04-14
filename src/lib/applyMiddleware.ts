@@ -5,7 +5,7 @@ import compose from "./utils/compose";
 export default function applyMiddleWare(
   ...middlewares: Middleware[]
 ) {
-  (
+  return (
       createStore: <StateType = any, ActionType extends Action = Action>(
         reducer: Reducer<StateType, ActionType>,
         enhancer?: any
@@ -21,9 +21,10 @@ export default function applyMiddleWare(
         },
         getState: store.getState
       };
-
+ 
       const dispatchPatchChain = middlewares.map(middleware => middleware(middlewareApi));
       const dispatch = compose(...dispatchPatchChain)(store.dispatch)
+      
       return {
         ...store,dispatch
       };

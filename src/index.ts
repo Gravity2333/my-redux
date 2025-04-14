@@ -1,6 +1,8 @@
 import { createStore } from "./lib";
 import applyMiddleWare from "./lib/applyMiddleware";
 import { Action } from "./lib/typings";
+import { take } from "./saga/io";
+import createSagaMiddleware from './saga/middleware'
 
 type ReducerState = {
   counter: number;
@@ -34,7 +36,19 @@ function reducer(state: ReducerState, action: ActionType): ReducerState {
   }
 }
 
-const store = createStore<ReducerState, ActionType>(reducer, applyMiddleWare());
+const sagaMiddleware = createSagaMiddleware()
+
+const store = createStore<ReducerState, ActionType>(reducer, applyMiddleWare(sagaMiddleware));
+
+sagaMiddleware.run(function* (){
+  while(1){
+    yield take({
+      type: ADD_NUM,
+      payload: ''
+    })
+    console.log('add')
+  }
+})
 
 const plus10 = document.getElementById("plus10");
 const minus10 = document.getElementById("minus10");

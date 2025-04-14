@@ -20,7 +20,7 @@ export default function createStore<
       throw new Error("enhancer参数需要传入一个函数！");
     }
 
-    enhancer(createStore)(reducer);
+    return enhancer(createStore)(reducer);
   }
 
   /** 当前的状态 初始化为null */
