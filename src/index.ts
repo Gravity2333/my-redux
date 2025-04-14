@@ -1,19 +1,18 @@
+import { ADD_NUM, FETCHDATA, SET_HUGE_DATA, SUB_NUM } from "./constants";
+import defSaga from "./defSaga";
 import { createStore } from "./lib";
 import applyMiddleWare from "./lib/applyMiddleware";
 import { Action } from "./lib/typings";
-import { take } from "./saga/io";
-import createSagaMiddleware from './saga/middleware'
+import createSagaMiddleware from "./saga/middleware";
 
 type ReducerState = {
   counter: number;
+  hugeData: string;
 };
 
 interface ActionType extends Action {
   payload: any;
 }
-
-const ADD_NUM = "ADD_NUM";
-const SUB_NUM = "SUB_NUM";
 
 function reducer(state: ReducerState, action: ActionType): ReducerState {
   switch (action.type) {
@@ -27,31 +26,34 @@ function reducer(state: ReducerState, action: ActionType): ReducerState {
         ...state,
         counter: state.counter - action.payload,
       };
+    case SET_HUGE_DATA:
+      return {
+        ...state,
+        hugeData: action.payload,
+      };
     default:
       return (
         state || {
           counter: 0,
+          hugeData: "",
         }
       );
   }
 }
 
-const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore<ReducerState, ActionType>(reducer, applyMiddleWare(sagaMiddleware));
+const store = createStore<ReducerState, ActionType>(
+  reducer,
+  applyMiddleWare(sagaMiddleware)
+);
 
-sagaMiddleware.run(function* (){
-  while(1){
-    yield take({
-      type: ADD_NUM,
-      payload: ''
-    })
-    console.log('add')
-  }
-})
+sagaMiddleware.run(defSaga);
 
 const plus10 = document.getElementById("plus10");
 const minus10 = document.getElementById("minus10");
+const mockDataShow = document.getElementById("counterShow");
+const fetchdataBtn = document.getElementById("fetchdata");
 const counterShow = document.getElementById("counterShow");
 
 plus10.addEventListener("click", () => {
@@ -68,8 +70,16 @@ minus10.addEventListener("click", () => {
   });
 });
 
+fetchdataBtn.addEventListener("click", () => {
+  store.dispatch({
+    type: FETCHDATA,
+    payload: 10,
+  });
+});
+
 function updateDom() {
   counterShow.innerText = store.getState().counter + "";
+  mockDataShow.innerText = store.getState().hugeData + "";
 }
 
 store.subscribe(() => {
