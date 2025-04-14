@@ -13,17 +13,17 @@ export default function applyMiddleWare(
     ) =>
     (reducer: Reducer) => {
       const store = createStore(reducer);
-
+      let dispatch = () => {
+        throw new Error("创建中间件的过程中 不能调用dispatch");
+      }
       const middlewareApi: MiddlewareAPI = {
         /** 创建middleware的时候 不能调用dispatch */
-        dispatch: () => {
-          throw new Error("创建中间件的过程中 不能调用dispatch");
-        },
+        dispatch,
         getState: store.getState
       };
  
       const dispatchPatchChain = middlewares.map(middleware => middleware(middlewareApi));
-      const dispatch = compose(...dispatchPatchChain)(store.dispatch)
+      dispatch = compose(...dispatchPatchChain)(store.dispatch)
       
       return {
         ...store,dispatch
