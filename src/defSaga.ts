@@ -1,6 +1,6 @@
 import { ADD_NUM, FETCHDATA, SET_HUGE_DATA } from "./constants";
 import { call, take, put, fork } from "./saga/io";
-import { takeEvery } from "./saga/io-helpers";
+import { takeEvery, takeLatest } from "./saga/io-helpers";
 import { fetchMockHugeData } from "./services";
 
 function* genA() {
@@ -16,12 +16,19 @@ function* genB() {
 }
 
 function* fetchMockData() {
-  const result = yield call(fetchMockHugeData, "arg1", "arg2");
+  try{
+    console.log('run fetchMockData')
+    const result = yield call(fetchMockHugeData, "arg1", "arg2");
+    console.log(result)
+    yield put({
+      type: SET_HUGE_DATA,
+      payload: result,
+    });
+    console.log('run fetchMockData end')
+  }finally{
+    return 'err'
+  }
 
-  yield put({
-    type: SET_HUGE_DATA,
-    payload: result,
-  });
 }
 
 export default function* defSaga() {
@@ -32,8 +39,11 @@ export default function* defSaga() {
   //   });
   //   console.log("add");
   // }
-  yield fork(genA);
-  yield fork(genB);
-
+  // const genATask = yield fork(genA);
+  
+  // console.log(genATask)
+  // genATask.cancel()
+  // console.log(genATask)
+  // const genBTask = yield fork(genB);
   yield takeEvery("FETCHDATA", fetchMockData);
 }

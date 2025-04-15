@@ -83,7 +83,7 @@ function updateDom() {
 }
 
 store.subscribe(() => {
-  console.log("state变动，counter为:", store.getState().counter);
+  // console.log("state变动，counter为:", store.getState().counter);
   updateDom();
 });
 
