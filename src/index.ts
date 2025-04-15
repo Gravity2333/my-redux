@@ -52,7 +52,7 @@ sagaMiddleware.run(defSaga);
 
 const plus10 = document.getElementById("plus10");
 const minus10 = document.getElementById("minus10");
-const mockDataShow = document.getElementById("counterShow");
+const mockDataShow = document.getElementById("mockData");
 const fetchdataBtn = document.getElementById("fetchdata");
 const counterShow = document.getElementById("counterShow");
 
