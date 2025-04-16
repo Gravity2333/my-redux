@@ -1,6 +1,6 @@
 import { ADD_NUM, FETCHDATA, SET_HUGE_DATA } from "./constants";
 import { call, take, put, fork } from "./saga/io";
-import { takeEvery, takeLatest } from "./saga/io-helpers";
+import { takeEvery, takeLatest, takeLeading } from "./saga/io-helpers";
 import { fetchMockHugeData } from "./services";
 
 function* genA() {
@@ -45,5 +45,5 @@ export default function* defSaga() {
   // genATask.cancel()
   // console.log(genATask)
   // const genBTask = yield fork(genB);
-  yield takeEvery("FETCHDATA", fetchMockData);
+  yield takeLeading("FETCHDATA", fetchMockData);
 }
