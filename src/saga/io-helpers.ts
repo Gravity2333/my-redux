@@ -9,7 +9,7 @@ export function* takeEvery(pattern: string, fn: any, ...args: any[]) {
 }
 
 export function* takeLatest(pattern: string, fn: any, ...args: any[]) {
-  let lastTask: { status: number; cancel: any }|null = null;
+  let lastTask: { status: number; cancel: any } | null = null;
   while (true) {
     yield take(pattern);
     if (lastTask && lastTask.status === RUNNING) {
@@ -20,12 +20,30 @@ export function* takeLatest(pattern: string, fn: any, ...args: any[]) {
 }
 
 export function* takeLeading(pattern: string, fn: any, ...args: any[]) {
-  let firstTask: { status: number; cancel: any }|null = null;
+  let firstTask: { status: number; cancel: any } | null = null;
   while (true) {
     yield take(pattern);
     if (firstTask && firstTask.status === RUNNING) {
       continue;
     }
     firstTask = yield fork(fn, ...args);
+  }
+}
+
+export function* throttle(
+  timeout: number,
+  pattern: string,
+  fn: any,
+  ...args: any[]
+) {
+  let timerObj: any = null;
+  while (true) {
+    yield take(pattern);
+    if (!timerObj) {
+      timerObj = setTimeout(() => {
+        timerObj = null;
+      }, timeout);
+      yield fork(fn, ...args);
+    }
   }
 }
