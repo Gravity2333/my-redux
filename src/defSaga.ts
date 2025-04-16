@@ -1,5 +1,5 @@
 import { ADD_NUM, FETCHDATA, SET_HUGE_DATA } from "./constants";
-import { call, take, put, fork } from "./saga/io";
+import { call, take, put, fork, select } from "./saga/io";
 import {
   takeEvery,
   takeLatest,
@@ -24,10 +24,11 @@ function* fetchMockData() {
   try {
     console.log("run fetchMockData");
     const result = yield call(fetchMockHugeData, "arg1", "arg2");
-    console.log(result);
+    const counter = yield select(state => state.counter)
+    console.log("counter is ",counter)
     yield put({
       type: SET_HUGE_DATA,
-      payload: result,
+      payload: result+counter,
     });
     console.log("run fetchMockData end");
   } finally {
