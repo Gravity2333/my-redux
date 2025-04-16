@@ -1,4 +1,4 @@
-import { fork, take } from "./io";
+import { cancel, fork, take } from "./io";
 import { RUNNING } from "./taskStatus";
 
 export function* takeEvery(pattern: string, fn: any, ...args: any[]) {
@@ -13,7 +13,7 @@ export function* takeLatest(pattern: string, fn: any, ...args: any[]) {
   while (true) {
     yield take(pattern);
     if (lastTask && lastTask.status === RUNNING) {
-      lastTask.cancel();
+      yield cancel(lastTask);
     }
     lastTask = yield fork(fn, ...args);
   }

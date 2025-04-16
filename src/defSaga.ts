@@ -49,5 +49,5 @@ export default function* defSaga() {
   // genATask.cancel()
   // console.log(genATask)
   // const genBTask = yield fork(genB);
-  yield throttle(1000, "FETCHDATA", fetchMockData);
+  yield takeLatest( "FETCHDATA", fetchMockData);
 }
