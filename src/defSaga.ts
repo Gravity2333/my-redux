@@ -1,5 +1,5 @@
 import { ADD_NUM, FETCHDATA, SET_HUGE_DATA } from "./constants";
-import { call, take, put, fork, select } from "./saga/io";
+import { call, take, put, fork, select, all, race } from "./saga/io";
 import {
   takeEvery,
   takeLatest,
@@ -24,16 +24,21 @@ function* fetchMockData() {
   try {
     console.log("run fetchMockData");
     const result = yield call(fetchMockHugeData, "arg1", "arg2");
-    const counter = yield select(state => state.counter)
-    console.log("counter is ",counter)
+    const counter = yield select((state) => state.counter);
+    console.log("counter is ", counter);
     yield put({
       type: SET_HUGE_DATA,
-      payload: result+counter,
+      payload: result + counter,
     });
     console.log("run fetchMockData end");
   } finally {
     return "err";
   }
+}
+
+function* fetchData(timeout: number) {
+  const result = yield call(fetchMockHugeData, timeout);
+  return result;
 }
 
 export default function* defSaga() {
@@ -50,5 +55,15 @@ export default function* defSaga() {
   // genATask.cancel()
   // console.log(genATask)
   // const genBTask = yield fork(genB);
-  yield takeLatest( "FETCHDATA", fetchMockData);
+  // yield takeLatest( "FETCHDATA", fetchMockData);
+  // console.log(yield call(fetchData))
+  const results = yield all([
+    call(fetchData, 3000),
+    call(fetchData, 2000),
+    call(fetchData, 4000),
+    call(fetchData, 3000),
+    call(fetchData, 1000),
+  ]);
+
+  console.log(results);
 }
