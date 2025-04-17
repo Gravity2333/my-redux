@@ -38,8 +38,12 @@ function* fetchMockData() {
 }
 
 function* fetchData(timeout: number) {
-  const result = yield call(fetchMockHugeData, timeout);
-  return result;
+  try {
+    const result = yield call(fetchMockHugeData, timeout);
+    return result;
+  } finally {
+    console.log("fetchData取消了!",timeout);
+  }
 }
 
 export default function* defSaga() {
@@ -51,23 +55,38 @@ export default function* defSaga() {
   //   console.log("add");
   // }
   // const genATask = yield fork(genA);
-
   // console.log(genATask)
   // genATask.cancel()
   // console.log(genATask)
   // const genBTask = yield fork(genB);
-  yield fork(takeLatest,"FETCHDATA", fetchMockData)
-  // console.log(yield call(fetchData))
-  console.log('before delay')
-  yield delay(2000)
-  console.log('after delay')
-  const results = yield all([
-    call(fetchData, 100),
-    call(fetchData, 100),
-    call(fetchData, 1000),
-    call(fetchData, 100),
-    call(fetchData, 1000),
-  ]);
-
-  console.log(results);
+  // yield fork(takeLatest,"FETCHDATA", fetchMockData)
+  // // console.log(yield call(fetchData))
+  // console.log('before delay')
+  // yield delay(2000)
+  // console.log('after delay')
+  // const results = yield all([
+  //   call(fetchData, 100),
+  //   call(fetchData, 100),
+  //   call(fetchData, 1000),
+  //   call(fetchData, 100),
+  //   call(fetchData, 1000),
+  // ]);
+  // console.log(results);
+  const task = yield fork(function* () {
+    try {
+      yield fork(fetchData, 1000);
+      yield fork(fetchData, 2000);
+      yield fork(fetchData, 3000);
+    } finally {
+      console.log("外层取消了");
+    }
+  });
+  task.cancel();
+  // console.log("after call");
+  // yield fork(function* (){
+  //   yield fork(fetchData,1000)
+  //   yield fork(fetchData,2000)
+  //   yield fork(fetchData,3000)
+  // })
+  // console.log('after fork')
 }
