@@ -1,5 +1,5 @@
 import { ADD_NUM, FETCHDATA, SET_HUGE_DATA } from "./constants";
-import { call, take, put, fork, select, all, race } from "./saga/io";
+import { call, take, put, fork, select, all, race, detach, spawn } from "./saga/io";
 import {
   delay,
   takeEvery,
@@ -40,9 +40,10 @@ function* fetchMockData() {
 function* fetchData(timeout: number) {
   try {
     const result = yield call(fetchMockHugeData, timeout);
+    console.log("fetchData结果 ",timeout,result);
     return result;
   } finally {
-    console.log("fetchData取消了!",timeout);
+    console.log("fetchData结束了!",timeout);
   }
 }
 
@@ -74,13 +75,15 @@ export default function* defSaga() {
   // console.log(results);
   const task = yield fork(function* () {
     try {
-      yield fork(fetchData, 1000);
-      yield fork(fetchData, 2000);
-      yield fork(fetchData, 3000);
+      yield detach(fork(fetchData, 1000));
+      yield detach(fork(fetchData, 2000));
+      yield spawn(fetchData, 3000);
     } finally {
       console.log("外层取消了");
     }
   });
+  task.aaa=111
+  console.log(task)
   task.cancel();
   // console.log("after call");
   // yield fork(function* (){
