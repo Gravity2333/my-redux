@@ -55,15 +55,15 @@ export default function* defSaga() {
   // genATask.cancel()
   // console.log(genATask)
   // const genBTask = yield fork(genB);
-  // yield takeLatest( "FETCHDATA", fetchMockData);
+  yield takeLatest( "FETCHDATA", fetchMockData);
   // console.log(yield call(fetchData))
-  const results = yield all([
-    call(fetchData, 3000),
-    call(fetchData, 2000),
-    call(fetchData, 4000),
-    call(fetchData, 3000),
-    call(fetchData, 1000),
-  ]);
+  // const results = yield all([
+  //   call(fetchData, 3000),
+  //   call(fetchData, 2000),
+  //   call(fetchData, 4000),
+  //   call(fetchData, 3000),
+  //   call(fetchData, 1000),
+  // ]);
 
-  console.log(results);
+  // console.log(results);
 }
