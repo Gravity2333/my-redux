@@ -3,7 +3,7 @@ import defSaga from "./defSaga";
 import { createStore } from "./lib";
 import applyMiddleWare from "./lib/applyMiddleware";
 import { Action } from "./lib/typings";
-import createSagaMiddleware from "./saga/middleware";
+import createSagaMiddleware from "./saga";
 
 type ReducerState = {
   counter: number;

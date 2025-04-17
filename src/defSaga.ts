@@ -1,12 +1,12 @@
 import { ADD_NUM, FETCHDATA, SET_HUGE_DATA } from "./constants";
-import { call, take, put, fork, select, all, race, detach, spawn } from "./saga/io";
+import { call, take, put, fork, select, all, race, detach, spawn } from "./saga";
 import {
   delay,
   takeEvery,
   takeLatest,
   takeLeading,
   throttle,
-} from "./saga/io-helpers";
+} from "./saga";
 import { fetchMockHugeData } from "./services";
 
 function* genA() {
