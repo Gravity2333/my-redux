@@ -59,21 +59,21 @@ const counterShow = document.getElementById("counterShow");
 plus10.addEventListener("click", () => {
   store.dispatch({
     type: ADD_NUM,
-    payload: 10,
+    payload: 20,
   });
 });
 
 minus10.addEventListener("click", () => {
   store.dispatch({
     type: SUB_NUM,
-    payload: 10,
+    payload: 20,
   });
 });
 
 fetchdataBtn.addEventListener("click", () => {
   store.dispatch({
     type: FETCHDATA,
-    payload: 10,
+    payload: 20,
   });
 });
 
