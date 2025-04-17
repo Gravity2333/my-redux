@@ -1,6 +1,7 @@
 import { ADD_NUM, FETCHDATA, SET_HUGE_DATA } from "./constants";
 import { call, take, put, fork, select, all, race } from "./saga/io";
 import {
+  delay,
   takeEvery,
   takeLatest,
   takeLeading,
@@ -55,15 +56,18 @@ export default function* defSaga() {
   // genATask.cancel()
   // console.log(genATask)
   // const genBTask = yield fork(genB);
-  yield takeLatest( "FETCHDATA", fetchMockData);
+  yield fork(takeLatest,"FETCHDATA", fetchMockData)
   // console.log(yield call(fetchData))
-  // const results = yield all([
-  //   call(fetchData, 3000),
-  //   call(fetchData, 2000),
-  //   call(fetchData, 4000),
-  //   call(fetchData, 3000),
-  //   call(fetchData, 1000),
-  // ]);
+  console.log('before delay')
+  yield delay(2000)
+  console.log('after delay')
+  const results = yield all([
+    call(fetchData, 100),
+    call(fetchData, 100),
+    call(fetchData, 1000),
+    call(fetchData, 100),
+    call(fetchData, 1000),
+  ]);
 
-  // console.log(results);
+  console.log(results);
 }
