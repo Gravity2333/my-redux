@@ -1,6 +1,4 @@
 const path = require("path");
-const CSSMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
-const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 // 打包MyAxios lib
 module.exports = {

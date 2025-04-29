@@ -7,6 +7,7 @@ import {
   takeLeading,
   throttle,
 } from "./middlewares/saga";
+import { CANCEL } from "./middlewares/saga/effectTypes";
 import { fetchMockHugeData } from "./services";
 
 function* genA() {
@@ -40,10 +41,10 @@ function* fetchMockData() {
 function* fetchData(timeout: number) {
   try {
     const result = yield call(fetchMockHugeData, timeout);
-    console.log("fetchData结果 ",timeout,result);
+    console.log("fetchData结果 ", timeout, result);
     return result;
   } finally {
-    console.log("fetchData结束了!",timeout);
+    console.log("fetchData结束了!", timeout);
   }
 }
 
@@ -73,18 +74,18 @@ export default function* defSaga() {
   //   call(fetchData, 1000),
   // ]);
   // console.log(results);
-  const task = yield fork(function* () {
-    try {
-      yield detach(fork(fetchData, 1000));
-      yield detach(fork(fetchData, 2000));
-      yield spawn(fetchData, 3000);
-    } finally {
-      console.log("外层取消了");
-    }
-  });
-  task.aaa=111
-  console.log(task)
-  task.cancel();
+  // const task = yield fork(function* () {
+  //   try {
+  //     yield detach(fork(fetchData, 1000));
+  //     yield detach(fork(fetchData, 2000));
+  //     yield spawn(fetchData, 3000);
+  //   } finally {
+  //     console.log("外层取消了");
+  //   }
+  // });
+  // task.aaa=111
+  // console.log(task)
+  // task.cancel();
   // console.log("after call");
   // yield fork(function* (){
   //   yield fork(fetchData,1000)
@@ -92,4 +93,18 @@ export default function* defSaga() {
   //   yield fork(fetchData,3000)
   // })
   // console.log('after fork')
+
+
+  const p = new Promise(r => setTimeout(() => {
+    r(567578678968979)
+  }, 2000))
+
+  p[CANCEL] = () => {
+    console.log('cancel')
+  }
+  console.log(yield race([
+    p,
+    456476578678,
+    
+  ]))
 }
