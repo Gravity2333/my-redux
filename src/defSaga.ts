@@ -49,6 +49,9 @@ function* fetchData(timeout: number) {
 }
 
 export default function* defSaga() {
+
+  yield takeEvery('FETCasdasHDATA',fetchData)
+  yield takeEvery('FETCHDATA',fetchData)
   // while (1) {
   //   yield take({
   //     type: ADD_NUM,
@@ -95,16 +98,16 @@ export default function* defSaga() {
   // console.log('after fork')
 
 
-  const p = new Promise(r => setTimeout(() => {
-    r(567578678968979)
-  }, 2000))
+  // const p = new Promise(r => setTimeout(() => {
+  //   r(567578678968979)
+  // }, 2000))
 
-  p[CANCEL] = () => {
-    console.log('cancel')
-  }
-  console.log(yield race([
-    p,
-    456476578678,
+  // p[CANCEL] = () => {
+  //   console.log('cancel')
+  // }
+  // console.log(yield race([
+  //   p,
+  //   456476578678,
     
-  ]))
+  // ]))
 }
