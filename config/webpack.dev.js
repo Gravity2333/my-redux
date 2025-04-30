@@ -1,7 +1,5 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CSSMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
-
 // 打包DEMO
 module.exports =  {
   mode: "none",
