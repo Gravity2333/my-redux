@@ -1,14 +1,18 @@
 {
-  "name": "my-redux",
-  "version": "0.0.1",
+  "name": "my-sample-redux",
+  "version": "0.0.2",
   "description": "自己实现一个简易的Redux",
   "main": "index.js",
   "author": "",
   "license": "ISC",
-    "exports": {
+  "exports": {
     ".": {
       "import": "./index.esm.js",
       "require": "./index.js"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gravity2333/my-redux"
   }
 }
