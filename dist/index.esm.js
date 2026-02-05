@@ -14,7 +14,7 @@
   \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ applyMiddleWare)\n/* harmony export */ });\n/* harmony import */ var _utils_compose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/compose */ \"./src/utils/compose.ts\");\n\n/** 应用中间件 */\nfunction applyMiddleWare(...middlewares) {\n    return (createStore) => (reducer) => {\n        const store = createStore(reducer);\n        let dispatch = (...args) => {\n            throw new Error(\"创建中间件的过程中 不能调用dispatch\");\n        };\n        const middlewareApi = {\n            /** 创建middleware的时候 不能调用dispatch */\n            dispatch: (...args) => dispatch(...args),\n            getState: store.getState,\n        };\n        const dispatchPatchChain = middlewares.map((middleware) => middleware(middlewareApi));\n        dispatch = (0,_utils_compose__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(...dispatchPatchChain)(store.dispatch);\n        return {\n            ...store,\n            dispatch,\n        };\n    };\n}\n\n\n//# sourceURL=webpack://my-redux/./src/applyMiddleware.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   applyMiddleWare: () => (/* binding */ applyMiddleWare)\n/* harmony export */ });\n/* harmony import */ var _utils_compose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/compose */ \"./src/utils/compose.ts\");\n\n/** 应用中间件 */\nfunction applyMiddleWare(...middlewares) {\n    return (createStore) => (reducer) => {\n        const store = createStore(reducer);\n        let dispatch = (...args) => {\n            throw new Error(\"创建中间件的过程中 不能调用dispatch\");\n        };\n        const middlewareApi = {\n            /** 创建middleware的时候 不能调用dispatch */\n            dispatch: (...args) => dispatch(...args),\n            getState: store.getState,\n        };\n        const dispatchPatchChain = middlewares.map((middleware) => middleware(middlewareApi));\n        dispatch = (0,_utils_compose__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(...dispatchPatchChain)(store.dispatch);\n        return {\n            ...store,\n            dispatch,\n        };\n    };\n}\n\n\n//# sourceURL=webpack://my-redux/./src/applyMiddleware.ts?");
 
 /***/ }),
 
@@ -44,7 +44,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   combineReducers: () => (/* reexport safe */ _combineReducers__WEBPACK_IMPORTED_MODULE_1__.combineReducers),\n/* harmony export */   createStore: () => (/* reexport safe */ _createStore__WEBPACK_IMPORTED_MODULE_0__[\"default\"])\n/* harmony export */ });\n/* harmony import */ var _createStore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createStore */ \"./src/createStore.ts\");\n/* harmony import */ var _combineReducers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./combineReducers */ \"./src/combineReducers.ts\");\n/* harmony import */ var _applyMiddleware__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./applyMiddleware */ \"./src/applyMiddleware.ts\");\n\n\n\n\n\n\n//# sourceURL=webpack://my-redux/./src/index.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   applyMiddleWare: () => (/* reexport safe */ _applyMiddleware__WEBPACK_IMPORTED_MODULE_2__.applyMiddleWare),\n/* harmony export */   combineReducers: () => (/* reexport safe */ _combineReducers__WEBPACK_IMPORTED_MODULE_1__.combineReducers),\n/* harmony export */   createStore: () => (/* reexport safe */ _createStore__WEBPACK_IMPORTED_MODULE_0__[\"default\"])\n/* harmony export */ });\n/* harmony import */ var _createStore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createStore */ \"./src/createStore.ts\");\n/* harmony import */ var _combineReducers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./combineReducers */ \"./src/combineReducers.ts\");\n/* harmony import */ var _applyMiddleware__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./applyMiddleware */ \"./src/applyMiddleware.ts\");\n\n\n\n\n\n\n//# sourceURL=webpack://my-redux/./src/index.ts?");
 
 /***/ }),
 
@@ -129,7 +129,8 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ // Load entry module and return exports
 /******/ // This entry module can't be inlined because the eval devtool is used.
 /******/ var __webpack_exports__ = __webpack_require__("./src/index.ts");
+/******/ const __webpack_exports__applyMiddleWare = __webpack_exports__.applyMiddleWare;
 /******/ const __webpack_exports__combineReducers = __webpack_exports__.combineReducers;
 /******/ const __webpack_exports__createStore = __webpack_exports__.createStore;
-/******/ export { __webpack_exports__combineReducers as combineReducers, __webpack_exports__createStore as createStore };
+/******/ export { __webpack_exports__applyMiddleWare as applyMiddleWare, __webpack_exports__combineReducers as combineReducers, __webpack_exports__createStore as createStore };
 /******/ 

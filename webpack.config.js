@@ -8,10 +8,9 @@ module.exports = [
     entry: "./src/index.ts",
     output: {
       path: path.resolve(__dirname, "./dist"),
-      filename: "my-redux.js",
+      filename: "index.js",
       chunkFilename: "chunk-[name]-[chunkhash:8].js",
       clean: true,
-      library: "myRedux",
       libraryTarget: "umd",
     },
     resolve: {
@@ -49,7 +48,7 @@ module.exports = [
     entry: "./src/index.ts",
     output: {
       path: path.resolve(__dirname, "./dist"),
-      filename: "my-redux.esm.js",
+      filename: "index.esm.js",
       chunkFilename: "chunk-[name]-[chunkhash:8].js",
       libraryTarget: "module",
     },

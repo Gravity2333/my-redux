@@ -2,7 +2,7 @@ import { Action, Middleware, MiddlewareAPI, Reducer, Store } from "./typings";
 import compose from "./utils/compose";
 
 /** 应用中间件 */
-export default function applyMiddleWare(...middlewares: Middleware[]) {
+export function applyMiddleWare(...middlewares: Middleware[]) {
   return (
       createStore: <StateType = any, ActionType extends Action = Action>(
         reducer: Reducer<StateType, ActionType>,
