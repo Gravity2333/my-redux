@@ -44,7 +44,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   applyMiddleWare: () => (/* reexport safe */ _applyMiddleware__WEBPACK_IMPORTED_MODULE_2__.applyMiddleWare),\n/* harmony export */   combineReducers: () => (/* reexport safe */ _combineReducers__WEBPACK_IMPORTED_MODULE_1__.combineReducers),\n/* harmony export */   createStore: () => (/* reexport safe */ _createStore__WEBPACK_IMPORTED_MODULE_0__[\"default\"])\n/* harmony export */ });\n/* harmony import */ var _createStore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createStore */ \"./src/createStore.ts\");\n/* harmony import */ var _combineReducers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./combineReducers */ \"./src/combineReducers.ts\");\n/* harmony import */ var _applyMiddleware__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./applyMiddleware */ \"./src/applyMiddleware.ts\");\n\n\n\n\n\n\n//# sourceURL=webpack://my-redux/./src/index.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   EActionType: () => (/* reexport safe */ _typings__WEBPACK_IMPORTED_MODULE_3__.EActionType),\n/* harmony export */   applyMiddleWare: () => (/* reexport safe */ _applyMiddleware__WEBPACK_IMPORTED_MODULE_2__.applyMiddleWare),\n/* harmony export */   combineReducers: () => (/* reexport safe */ _combineReducers__WEBPACK_IMPORTED_MODULE_1__.combineReducers),\n/* harmony export */   createStore: () => (/* reexport safe */ _createStore__WEBPACK_IMPORTED_MODULE_0__[\"default\"])\n/* harmony export */ });\n/* harmony import */ var _createStore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createStore */ \"./src/createStore.ts\");\n/* harmony import */ var _combineReducers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./combineReducers */ \"./src/combineReducers.ts\");\n/* harmony import */ var _applyMiddleware__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./applyMiddleware */ \"./src/applyMiddleware.ts\");\n/* harmony import */ var _typings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./typings */ \"./src/typings.ts\");\n\n\n\n\n\n\n\n//# sourceURL=webpack://my-redux/./src/index.ts?");
 
 /***/ }),
 
@@ -129,8 +129,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ // Load entry module and return exports
 /******/ // This entry module can't be inlined because the eval devtool is used.
 /******/ var __webpack_exports__ = __webpack_require__("./src/index.ts");
+/******/ const __webpack_exports__EActionType = __webpack_exports__.EActionType;
 /******/ const __webpack_exports__applyMiddleWare = __webpack_exports__.applyMiddleWare;
 /******/ const __webpack_exports__combineReducers = __webpack_exports__.combineReducers;
 /******/ const __webpack_exports__createStore = __webpack_exports__.createStore;
-/******/ export { __webpack_exports__applyMiddleWare as applyMiddleWare, __webpack_exports__combineReducers as combineReducers, __webpack_exports__createStore as createStore };
+/******/ export { __webpack_exports__EActionType as EActionType, __webpack_exports__applyMiddleWare as applyMiddleWare, __webpack_exports__combineReducers as combineReducers, __webpack_exports__createStore as createStore };
 /******/ 
