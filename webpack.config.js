@@ -80,6 +80,10 @@ module.exports = [
             from: "./package.bundle.json",
             to: "./package.json",
           },
+          {
+            from:'./README.md',
+            to:'./'
+          }
         ],
       }),
     ],
