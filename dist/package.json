@@ -1,0 +1,14 @@
+{
+  "name": "my-redux",
+  "version": "0.0.1",
+  "description": "自己实现一个简易的Redux",
+  "main": "my-redux.js",
+  "author": "",
+  "license": "ISC",
+    "exports": {
+    ".": {
+      "import": "./my-redux.esm.js",
+      "require": "./my-redux.js"
+    }
+  }
+}
